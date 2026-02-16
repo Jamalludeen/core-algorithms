@@ -26,3 +26,31 @@ def dfs_iterative(root):
             stack.append(node.left)
 
     return result
+
+
+def dfs_graph(graph, start):
+    """
+    DFS traversal for graphs (handles cycles)
+
+    Args:
+        graph: Adjacency list representation {node: [neighbors]}
+        start: Starting node
+
+    Returns:
+        List of visited nodes in DFS order
+    """
+    visited = set()
+    result = []
+
+    def dfs(node):
+        # Mark current node as visited
+        visited.add(node)
+        result.append(node)
+
+        # Visit all unvisited neighbors
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                dfs(neighbor)
+
+    dfs(start)
+    return result
