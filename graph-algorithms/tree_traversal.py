@@ -46,7 +46,7 @@ def dfs_tree_traversal(tree, node, visited=None):
     if visited is None:
         visited = set()
     
-    if node not in visited:
+    if node.data not in visited:
         print(node.data, end=' ')
         visited.add(node.data)
         if node.left_node:
