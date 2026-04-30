@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, data, parent=None):
         self.data = data
@@ -33,7 +36,7 @@ class BinaryTree:
             self._in_order_traversal(self.root)
         else:
             print("Tree is empty")
-    
+
     def _in_order_traversal(self, node):
         if node.left_node:
             self._in_order_traversal(node.left_node)
@@ -41,6 +44,74 @@ class BinaryTree:
 
         if node.right_node:
             self._in_order_traversal(node.right_node)
+
+    def pre_order(self):
+        if self.root:
+            self._pre_order_traversal(self.root)
+        else:
+            print("Tree is empty")
+
+    def _pre_order_traversal(self, node):
+        print(node.data)
+        if node.left_node:
+            self._pre_order_traversal(node.left_node)
+        if node.right_node:
+            self._pre_order_traversal(node.right_node)
+
+    def post_order(self):
+        if self.root:
+            self._post_order_traversal(self.root)
+        else:
+            print("Tree is empty")
+
+    def _post_order_traversal(self, node):
+        if node.left_node:
+            self._post_order_traversal(node.left_node)
+        if node.right_node:
+            self._post_order_traversal(node.right_node)
+        print(node.data)
+
+    def level_order(self):
+        if not self.root:
+            print("Tree is empty")
+            return
+
+        queue = deque([self.root])
+        while queue:
+            node = queue.popleft()
+            print(node.data)
+            if node.left_node:
+                queue.append(node.left_node)
+            if node.right_node:
+                queue.append(node.right_node)
+
+    def search(self, data):
+        return self._search_node(data, self.root)
+
+    def _search_node(self, data, node):
+        if node is None:
+            return None
+        if data == node.data:
+            return node
+        if data < node.data:
+            return self._search_node(data, node.left_node)
+        return self._search_node(data, node.right_node)
+
+    def height(self):
+        return self._height(self.root)
+
+    def _height(self, node):
+        if node is None:
+            return 0
+        return 1 + max(self._height(node.left_node), self._height(node.right_node))
+
+    def count_nodes(self):
+        return self._count_nodes(self.root)
+
+    def _count_nodes(self, node):
+        if node is None:
+            return 0
+        return 1 + self._count_nodes(node.left_node) + self._count_nodes(node.right_node)
 
 def dfs_tree_traversal(tree, node, visited=None):
     if visited is None:
