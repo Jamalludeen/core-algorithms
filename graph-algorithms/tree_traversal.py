@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, data, parent=None):
         self.data = data
@@ -67,6 +70,20 @@ class BinaryTree:
         if node.right_node:
             self._post_order_traversal(node.right_node)
         print(node.data)
+
+    def level_order(self):
+        if not self.root:
+            print("Tree is empty")
+            return
+
+        queue = deque([self.root])
+        while queue:
+            node = queue.popleft()
+            print(node.data)
+            if node.left_node:
+                queue.append(node.left_node)
+            if node.right_node:
+                queue.append(node.right_node)
 
 def dfs_tree_traversal(tree, node, visited=None):
     if visited is None:
