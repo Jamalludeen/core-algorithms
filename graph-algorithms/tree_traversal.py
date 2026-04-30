@@ -55,6 +55,19 @@ class BinaryTree:
         if node.right_node:
             self._pre_order_traversal(node.right_node)
 
+    def post_order(self):
+        if self.root:
+            self._post_order_traversal(self.root)
+        else:
+            print("Tree is empty")
+
+    def _post_order_traversal(self, node):
+        if node.left_node:
+            self._post_order_traversal(node.left_node)
+        if node.right_node:
+            self._post_order_traversal(node.right_node)
+        print(node.data)
+
 def dfs_tree_traversal(tree, node, visited=None):
     if visited is None:
         visited = set()
