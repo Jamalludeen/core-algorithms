@@ -24,8 +24,8 @@ class Solution:
 if __name__ == "__main__":
     '[1,null,2]'
     node1 = TreeNode(1)
-    node1.left = TreeNode('null')
-    node1.right = TreeNode('2')
+    node1.left = None
+    node1.right = TreeNode(2)
 
     s = Solution()
     print(s.maxDepth(node1))
