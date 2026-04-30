@@ -2,7 +2,8 @@
 104 Maximum depth of binary tree
 '''
 
-from typing import Optional 
+from collections import deque
+from typing import Optional
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -18,8 +19,25 @@ class Solution:
         
         left_depth = self.maxDepth(root.left)
         right_depth = self.maxDepth(root.right)
-        
+
         return 1 + max(left_depth, right_depth)
+
+    def maxDepthIterative(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        queue = deque([root])
+        depth = 0
+        while queue:
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            depth += 1
+        return depth
+
 
 if __name__ == "__main__":
     '[1,null,2]'
@@ -29,3 +47,4 @@ if __name__ == "__main__":
 
     s = Solution()
     print(s.maxDepth(node1))
+    print(s.maxDepthIterative(node1))
