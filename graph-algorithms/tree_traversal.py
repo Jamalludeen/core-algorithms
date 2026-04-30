@@ -105,6 +105,14 @@ class BinaryTree:
             return 0
         return 1 + max(self._height(node.left_node), self._height(node.right_node))
 
+    def count_nodes(self):
+        return self._count_nodes(self.root)
+
+    def _count_nodes(self, node):
+        if node is None:
+            return 0
+        return 1 + self._count_nodes(node.left_node) + self._count_nodes(node.right_node)
+
 def dfs_tree_traversal(tree, node, visited=None):
     if visited is None:
         visited = set()
