@@ -16,3 +16,7 @@ graph = {
     'E': ['B','F'],
     'F': ['C','E']
 }
+
+if __name__ == "__main__":
+    dfs_recursive(graph, 'A')
+    print()
