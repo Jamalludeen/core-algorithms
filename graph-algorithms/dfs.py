@@ -1,4 +1,11 @@
-def dfs_recursive(graph, node, visited=None):
+from typing import Dict, Hashable, List, Optional, Set
+
+
+def dfs_recursive(
+    graph: Dict[Hashable, List[Hashable]],
+    node: Hashable,
+    visited: Optional[Set[Hashable]] = None,
+) -> None:
     if visited is None:
         visited = set()
 
@@ -9,9 +16,12 @@ def dfs_recursive(graph, node, visited=None):
             dfs_recursive(graph, node=neighbor, visited=visited)
 
 
-def dfs_iterative(graph, start):
-    visited = set()
-    stack = [start]
+def dfs_iterative(
+    graph: Dict[Hashable, List[Hashable]],
+    start: Hashable,
+) -> None:
+    visited: Set[Hashable] = set()
+    stack: List[Hashable] = [start]
 
     while stack:
         node = stack.pop()
