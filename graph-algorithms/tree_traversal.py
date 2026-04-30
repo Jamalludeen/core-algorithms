@@ -85,6 +85,18 @@ class BinaryTree:
             if node.right_node:
                 queue.append(node.right_node)
 
+    def search(self, data):
+        return self._search_node(data, self.root)
+
+    def _search_node(self, data, node):
+        if node is None:
+            return None
+        if data == node.data:
+            return node
+        if data < node.data:
+            return self._search_node(data, node.left_node)
+        return self._search_node(data, node.right_node)
+
 def dfs_tree_traversal(tree, node, visited=None):
     if visited is None:
         visited = set()
