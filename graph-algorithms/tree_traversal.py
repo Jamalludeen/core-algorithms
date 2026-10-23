@@ -114,16 +114,14 @@ class BinaryTree:
         return 1 + self._count_nodes(node.left_node) + self._count_nodes(node.right_node)
 
 def dfs_tree_traversal(tree, node, visited=None):
-    if visited is None:
-        visited = set()
-    
-    if node.data not in visited:
-        print(node.data, end=' ')
-        visited.add(node.data)
-        if node.left_node:
-            dfs_tree_traversal(tree=tree, node=node.left_node, visited=visited)
-        if node.right_node:
-            dfs_tree_traversal(tree=tree, node=node.right_node, visited=visited)
+    if node is None:
+        return
+
+    print(node.data, end=' ')
+    if node.left_node:
+        dfs_tree_traversal(tree=tree, node=node.left_node, visited=visited)
+    if node.right_node:
+        dfs_tree_traversal(tree=tree, node=node.right_node, visited=visited)
 
 
 if __name__ == "__main__":
