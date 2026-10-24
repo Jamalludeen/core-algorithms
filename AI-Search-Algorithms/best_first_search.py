@@ -3,23 +3,25 @@ import heapq
 
 
 def greedy_best_first_search(graph, start, goal, heuristic):
-    frontier = []
-    counter = count()
+    frontier = [] # list of nodes that have been discovered but have not yet been explored. It acts as the algorithm's waiting list.
+    counter = count() # Creates the tie-breaking sequence used when adding nodes to the priority queue.
 
+    # [(7, 0, "S")]
     heapq.heappush(
         frontier, 
         (heuristic[start], next(counter), start)
     )
 
-    parent = {start:None}
-    discovered = {start}
-    explored = set()
+    
+    parent = {start:None} # {"S": None}
+    discovered = {start} # Keeps track of nodes already discovered or added to the frontier.
+    explored = set() # Stores nodes that have been removed from the frontier and processed.
 
     while frontier:
         _, _, current = heapq.heappop(frontier)
         explored.add(current)
 
-        if current == goal:
+        if current == goal: # Checks whether the selected node is the goal.
             path = []
             node = goal
             while node is not None:
@@ -29,12 +31,12 @@ def greedy_best_first_search(graph, start, goal, heuristic):
             path.reverse()
             return path, explored
     
-        for neighbor in graph[current]:
-            if neighbor not in discovered:
-                discovered.add(neighbor)
-                parent[neighbor] = current
+        for neighbor in graph[current]: # explore the neighbors of the current node
+            if neighbor not in discovered: # if the neighor has not been discovered yet
+                discovered.add(neighbor) # add to discovered list
+                parent[neighbor] = current # track its parent
 
-                heapq.heappush(
+                heapq.heappush( # push it to the heap
                     frontier,
                     (
                         heuristic[neighbor],
