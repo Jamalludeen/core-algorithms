@@ -46,3 +46,37 @@ def bidirectional_search(graph, start, goal):
     # The searches did not connect
     return None
 
+
+def build_path(meeting, parent_forward, parent_backward):
+    # Reconstruct the start-to-meeting section
+    left = []
+    node = meeting
+
+    while node is not None:
+        left.append(node)
+        node = parent_forward[node]
+
+    left.reverse()
+
+    # Reconstruct the meeting-to-goal section
+    right = []
+    node = parent_backward[meeting]
+
+    while node is not None:
+        right.append(node)
+        node = parent_backward[node]
+
+    return left + right
+
+
+graph = {
+    "S": ["A"],
+    "A": ["S", "B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "G"],
+    "D": ["B", "G"],
+    "G": ["C", "D"]
+}
+
+path = bidirectional_search(graph, "S", "G")
+print("Path:", path)
