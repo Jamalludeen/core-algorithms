@@ -189,3 +189,21 @@ path, explored, statistics = greedy_best_first_search(
     heuristic=heuristic
 )
 
+
+# ======================================================
+# Display results
+# ======================================================
+
+print("\n--- Search Results ---")
+
+if path is not None:
+    print("Path:", " -> ".join(path))
+else:
+    print("No path found.")
+
+print("Explored nodes:", explored)
+
+print("\n--- Search Statistics ---")
+
+for key, value in statistics.items():
+    print(f"{key}: {value}")
