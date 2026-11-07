@@ -2,3 +2,4 @@ learnings
 
 __pycache__/
 *.py[cod]
+.venv/*
